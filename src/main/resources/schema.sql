@@ -35,7 +35,8 @@ VALUES ('buttercup', 'email');
 
 INSERT INTO customers (users_id, company, mr_ms, first_name, last_name, city, state, postal_code, job_title,
                        business_phone, address1, address2, notes)
-VALUES (users_id = (SELECT users_id from users LIMIT 1), 'buttercup', 'A Quo Co', 'Ms', 'Erica', 'Ingram', 'Seattle',
+VALUES ((SELECT users_id from users WHERE username = 'buttercup' LIMIT 1), 'A Quo Co', 'Ms', 'Erica', 'Ingram',
+        'Seattle',
         'WA',
         '98119', 'Owner',
         '1234567890', '123 Anywhere USA', 'Address2', 'Notes Here');
