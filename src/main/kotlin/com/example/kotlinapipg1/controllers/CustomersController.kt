@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -30,6 +31,9 @@ class CustomersController(val customersService: CustomersService) {
 
     @GetMapping("/customers/company/{company}")
     fun findCustomerByCompany(@PathVariable company: String): Customer = customersService.findCustomerByCompany(company)
+
+    @PutMapping("/customers/{customersId}")
+    fun updateByCustomersId(@PathVariable customersId: String) = customersService.deleteByCustomersId(customersId)
 
     @DeleteMapping("/customers/{customersId}")
     fun deleteByCustomersId(@PathVariable customersId: String) = customersService.deleteByCustomersId(customersId)

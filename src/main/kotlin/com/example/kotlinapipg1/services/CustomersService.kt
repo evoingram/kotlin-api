@@ -19,6 +19,8 @@ class CustomersService(val db: CustomersRepository) {
 
     fun deleteByCustomersId(customersId: String) = db.deleteByCustomersId(customersId)
 
+    fun updateByCustomersId(customersId: String) = db.updateCustomerByCustomersId(customersId)
+
     fun existsByCustomersId(customersId: String) = db.existsByCustomersId(customersId)
 
     fun findCustomerByPhoneNumber(phoneNumber: String): Customer =

@@ -10,5 +10,7 @@ interface CustomersRepository : CrudRepository<Customer, String> {
 
     fun deleteByCustomersId(customersId: String)
 
+    fun updateCustomerByCustomersId(customersId: String)
+
     fun existsByCustomersId(customersId: String)
 }
