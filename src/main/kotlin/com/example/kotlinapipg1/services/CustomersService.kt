@@ -1,6 +1,7 @@
 package com.example.kotlinapipg1.services
 
 import com.example.kotlinapipg1.Customer
+import com.example.kotlinapipg1.dataClasses.CustomerRequest
 import com.example.kotlinapipg1.repositories.CustomersRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -17,9 +18,24 @@ class CustomersService(val db: CustomersRepository) {
 
     fun findAllByCustomersId(customersId: String): MutableIterable<Customer> = db.findAllByCustomersId(customersId)
 
-    fun deleteByCustomersId(customersId: String) = db.deleteByCustomersId(customersId)
+    fun updateCustomerByCustomersId(customersId: String, customerRequest: CustomerRequest) =
+        db.updateCustomerByCustomersId(
+            customersId,
+            customerRequest.firstName,
+            customerRequest.lastName,
+            customerRequest.city,
+            customerRequest.state,
+            customerRequest.postalCode,
+            customerRequest.company,
+            customerRequest.mrMs,
+            customerRequest.jobTitle,
+            customerRequest.businessPhone,
+            customerRequest.address1,
+            customerRequest.address2,
+            customerRequest.notes
+        )
 
-    fun updateByCustomersId(customersId: String) = db.updateCustomerByCustomersId(customersId)
+    fun deleteByCustomersId(customersId: String) = db.deleteByCustomersId(customersId)
 
     fun existsByCustomersId(customersId: String) = db.existsByCustomersId(customersId)
 
