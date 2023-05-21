@@ -4,5 +4,11 @@ import com.example.kotlinapipg1.Customer
 import org.springframework.data.repository.CrudRepository
 
 interface CustomersRepository : CrudRepository<Customer, String> {
-    fun findAllById(id: String): MutableIterable<Customer>
+    fun findAllByCustomersId(customersId: String): MutableIterable<Customer>
+
+    fun findByCustomersId(customersId: String): List<Customer>
+
+    fun deleteByCustomersId(customersId: String)
+
+    fun existsByCustomersId(customersId: String)
 }

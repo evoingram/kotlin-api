@@ -5,8 +5,8 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table("CUSTOMERS")
 data class Customer(
-    @Id var id: String?,
-    val userId: String,
+    @Id var customersId: String?,
+    val usersId: String,
     val firstName: String,
     val lastName: String,
     val city: String,

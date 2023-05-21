@@ -9,17 +9,17 @@ import java.util.*
 class CustomersService(val db: CustomersRepository) {
     fun findCustomers(): List<Customer> = db.findAll().toList()
 
-    fun findCustomerById(id: String): List<Customer> = db.findById(id).toList()
+    fun findCustomerByCustomersId(customersId: String): List<Customer> = db.findByCustomersId(customersId).toList()
 
     fun save(customer: Customer) {
         db.save(customer)
     }
 
-    fun findAllById(id: String): MutableIterable<Customer> = db.findAllById(id)
+    fun findAllByCustomersId(customersId: String): MutableIterable<Customer> = db.findAllByCustomersId(customersId)
 
-    fun deleteById(id: String) = db.deleteById(id)
+    fun deleteByCustomersId(customersId: String) = db.deleteByCustomersId(customersId)
 
-    fun existsById(id: String) = db.existsById(id)
+    fun existsByCustomersId(customersId: String) = db.existsByCustomersId(customersId)
 
     fun findCustomerByPhoneNumber(phoneNumber: String): Customer =
         db.findAll().filter { it.businessPhone == phoneNumber }[0]

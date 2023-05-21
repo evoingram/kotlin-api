@@ -14,14 +14,15 @@ class CustomersController(val customersService: CustomersService) {
     @GetMapping("/customers")
     fun index(): List<Customer> = customersService.findCustomers()
 
-    @GetMapping("/customers/{id}")
-    fun findCustomerById(@PathVariable id: String) = customersService.findCustomerById(id)
+    @GetMapping("/customers/{customersId}")
+    fun findCustomerByCustomersId(@PathVariable customersId: String) =
+        customersService.findCustomerByCustomersId(customersId)
 
-    @GetMapping("/customers/{id}/all")
-    fun findAllById(@PathVariable id: String) = customersService.findAllById(id)
+    @GetMapping("/customers/{customersId}/all")
+    fun findAllByCustomersId(@PathVariable customersId: String) = customersService.findAllByCustomersId(customersId)
 
-    @GetMapping("/customers/{id}/exists")
-    fun existsById(@PathVariable id: String) = customersService.existsById(id)
+    @GetMapping("/customers/{customersId}/exists")
+    fun existsByCustomersId(@PathVariable customersId: String) = customersService.existsByCustomersId(customersId)
 
     @GetMapping("/customers/phoneNumber/{phoneNumber}")
     fun findCustomerByPhoneNumber(@PathVariable phoneNumber: String): Customer =
@@ -30,8 +31,8 @@ class CustomersController(val customersService: CustomersService) {
     @GetMapping("/customers/company/{company}")
     fun findCustomerByCompany(@PathVariable company: String): Customer = customersService.findCustomerByCompany(company)
 
-    @DeleteMapping("/customers/{id}")
-    fun deleteById(@PathVariable id: String) = customersService.deleteById(id)
+    @DeleteMapping("/customers/{customersId}")
+    fun deleteByCustomersId(@PathVariable customersId: String) = customersService.deleteByCustomersId(customersId)
 
     @PostMapping("/customers")
     fun post(@RequestBody customer: Customer) = customersService.save(customer)
