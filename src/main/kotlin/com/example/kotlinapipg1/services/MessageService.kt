@@ -15,6 +15,8 @@ class MessageService(val db: MessageRepository) {
         db.save(message)
     }
 
+    fun findAllById(id: String) = db.findAllById(id)
+
     fun <T : Any> Optional<out T>.toList(): List<T> =
         if (isPresent) listOf(get()) else emptyList()
 }
