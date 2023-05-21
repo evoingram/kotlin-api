@@ -1,13 +1,9 @@
 package com.example.kotlinapipg1.controllers
 
 import com.example.kotlinapipg1.User
+import com.example.kotlinapipg1.dataClasses.UserRequest
 import com.example.kotlinapipg1.services.UsersService
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class UsersController(val usersService: UsersService) {
@@ -29,6 +25,12 @@ class UsersController(val usersService: UsersService) {
 
     @GetMapping("/users/username/{username}")
     fun findUserByUsername(@PathVariable username: String): User = usersService.findUserByUsername(username)
+
+    @PutMapping("/users/{usersId}")
+    fun updateUserByUsersId(@PathVariable usersId: String, @RequestBody userRequest: UserRequest): String {
+        val rowsUpdated = usersService.updateUserByUsersId(usersId, userRequest)
+        return "Updated $rowsUpdated user(s)"
+    }
 
     @DeleteMapping("/users/{usersId}")
     fun deleteByUsersId(@PathVariable usersId: String) = usersService.deleteByUsersId(usersId)
