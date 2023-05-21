@@ -13,7 +13,7 @@ data class Customer(
     val state: String,
     val postalCode: String,
     val company: String? = null,
-    val mrms: String? = null,
+    val mrMs: String? = null,
     val jobTitle: String? = null,
     val businessPhone: String? = null,
     val address1: String? = null,
