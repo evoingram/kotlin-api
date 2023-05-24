@@ -8,4 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 class KafkaController(val kafkaService: KafkaService) {
     @GetMapping("/messages/send")
     fun produceCustomersMessages(): String = kafkaService.produceCustomersMessage()
+
+    @GetMapping("/messages/receive")
+    fun consumeCustomersMessages(): String = kafkaService.consumeCustomersMessage()
 }

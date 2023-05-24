@@ -8,4 +8,14 @@ class KafkaRepositoryImpl : KafkaRepository {
         val kafkaService = KafkaService()
         return kafkaService.produceCustomersMessage()
     }
+
+    override fun consumeCustomersMessage(): String {
+        val kafkaService = KafkaService()
+        return kafkaService.consumeCustomersMessage()
+    }
+
+    override fun keepRecords() {
+        val kafkaService = KafkaService()
+        return kafkaService.keepRecords()
+    }
 }
