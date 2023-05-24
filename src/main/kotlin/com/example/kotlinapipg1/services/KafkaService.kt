@@ -1,12 +1,10 @@
 package com.example.kotlinapipg1.services
 
-import com.example.kotlinapipg1.Customer
 import com.example.kotlinapipg1.kafka.KafkaConsumer
 import com.example.kotlinapipg1.kafka.KafkaProducer
 import com.example.kotlinapipg1.repositories.KafkaRepository
 import com.example.kotlinapipg1.utils.Constants.BROKER_ADDRESS
 import com.example.kotlinapipg1.utils.Constants.CUSTOMERS_TOPIC
-import com.example.kotlinapipg1.utils.DataSerializer
 import org.springframework.stereotype.Service
 import java.time.Duration
 
@@ -33,15 +31,12 @@ class KafkaService : KafkaRepository {
 
     override fun keepRecords() {
         println("keepRecords is running")
-        val dataSerializer = DataSerializer()
         val records = kafkaConsumer.poll(Duration.ofSeconds(1))
         println("$records = number of records")
         records.forEach { customer ->
             val customerJson = customer.value()
             println("customer JSON = $customerJson")
-
-            val customerPerson = dataSerializer.jsonMapper().readValue(customerJson, Customer::class.java)
-            println("customerPerson = $customerPerson")
         }
+        println("All kafka records consumed.")
     }
 }
