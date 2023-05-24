@@ -3,7 +3,13 @@ package com.example.kotlinapipg1.controllers
 import com.example.kotlinapipg1.Customer
 import com.example.kotlinapipg1.dataClasses.CustomerRequest
 import com.example.kotlinapipg1.services.CustomersService
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class CustomersController(val customersService: CustomersService) {
