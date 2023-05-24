@@ -12,13 +12,13 @@ class UserTest {
     val mockUser1 = User(
         usersId.toString(),
         "buttercup",
-        "email@email.com"
+        "email@email.com",
     )
 
     val mockUser2 = User(
         usersId.toString(),
         "buttercup",
-        "email@email.com"
+        "email@email.com",
     )
 
     @Test

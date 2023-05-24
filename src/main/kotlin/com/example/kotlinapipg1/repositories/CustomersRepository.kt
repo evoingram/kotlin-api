@@ -13,13 +13,13 @@ interface CustomersRepository : CrudRepository<Customer, String> {
     @Modifying
     @Query(
         "UPDATE customers " +
-                "SET firstName = :first_name, " +
-                "lastName = :last_name, " +
-                "city = :city, state = :state, postalCode = :postal_code,  " +
-                "company = :company, mrMs = :mr_ms, jobTitle = :job_title, " +
-                "businessPhone = :business_phone, address1 = :address1, address2 = :address2, " +
-                "notes = :notes " +
-                "WHERE customersId = :customersId"
+            "SET firstName = :first_name, " +
+            "lastName = :last_name, " +
+            "city = :city, state = :state, postalCode = :postal_code,  " +
+            "company = :company, mrMs = :mr_ms, jobTitle = :job_title, " +
+            "businessPhone = :business_phone, address1 = :address1, address2 = :address2, " +
+            "notes = :notes " +
+            "WHERE customersId = :customersId",
     )
     fun updateCustomerByCustomersId(
         customersId: String,
@@ -34,7 +34,7 @@ interface CustomersRepository : CrudRepository<Customer, String> {
         businessPhone: String? = null,
         address1: String? = null,
         address2: String? = null,
-        notes: String? = null
+        notes: String? = null,
     )
 
     fun deleteByCustomersId(customersId: String)

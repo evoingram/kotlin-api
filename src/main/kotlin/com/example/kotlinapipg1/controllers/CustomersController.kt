@@ -30,7 +30,7 @@ class CustomersController(val customersService: CustomersService) {
     @PutMapping("/users/{customersId}")
     fun updateCustomererByCustomersId(
         @PathVariable customersId: String,
-        @RequestBody customerRequest: CustomerRequest
+        @RequestBody customerRequest: CustomerRequest,
     ): String {
         val rowsUpdated = customersService.updateCustomerByCustomersId(customersId, customerRequest)
         return "Updated $rowsUpdated customer(s)"

@@ -7,5 +7,5 @@ import org.springframework.data.relational.core.mapping.Table
 data class User(
     @Id var usersId: String?,
     val username: String,
-    val email: String
+    val email: String,
 )

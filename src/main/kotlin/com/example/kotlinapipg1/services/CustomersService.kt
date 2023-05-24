@@ -32,7 +32,7 @@ class CustomersService(val db: CustomersRepository) {
             customerRequest.businessPhone,
             customerRequest.address1,
             customerRequest.address2,
-            customerRequest.notes
+            customerRequest.notes,
         )
 
     fun deleteByCustomersId(customersId: String) = db.deleteByCustomersId(customersId)

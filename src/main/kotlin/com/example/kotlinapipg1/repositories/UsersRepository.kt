@@ -16,5 +16,5 @@ interface UsersRepository : CrudRepository<User, String> {
 
     fun deleteByUsersId(usersId: String)
 
-    fun existsByUsersId(usersId: String)
+    fun existsByUsersId(usersId: String?)
 }

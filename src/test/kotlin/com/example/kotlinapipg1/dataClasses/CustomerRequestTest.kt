@@ -24,7 +24,7 @@ class CustomerRequestTest {
         "1234567890",
         "123 Anywhere Street",
         null,
-        null
+        null,
     )
 
     private val mockCustomerRequest2 = CustomerRequest(
@@ -41,7 +41,7 @@ class CustomerRequestTest {
         "1234567890",
         "123 Anywhere Street",
         null,
-        null
+        null,
     )
 
     @Test

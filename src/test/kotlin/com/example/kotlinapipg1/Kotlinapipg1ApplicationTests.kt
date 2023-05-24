@@ -9,5 +9,4 @@ class Kotlinapipg1ApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test
 class UserRequestTest {
     private val mockUserRequest1 = UserRequest(
         "buttercup",
-        "email@email.com"
+        "email@email.com",
     )
 
     private val mockUserRequest2 = UserRequest(
         "buttercup",
-        "email@email.com"
+        "email@email.com",
     )
 
     @Test

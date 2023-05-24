@@ -11,12 +11,12 @@ class MessageTest {
 
     private val message1 = Message(
         messageId.toString(),
-        "testing messages"
+        "testing messages",
     )
 
     private val message2 = Message(
         messageId.toString(),
-        "testing messages"
+        "testing messages",
     )
 
     @Test

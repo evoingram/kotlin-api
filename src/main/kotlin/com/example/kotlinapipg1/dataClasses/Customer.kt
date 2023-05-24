@@ -18,5 +18,5 @@ data class Customer(
     val businessPhone: String? = null,
     val address1: String? = null,
     val address2: String? = null,
-    val notes: String? = null
+    val notes: String? = null,
 )
