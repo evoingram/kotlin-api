@@ -31,6 +31,7 @@ dependencies {
     implementation("com.github.javafaker:javafaker:1.0.2")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.1")
     implementation("org.apache.kafka:kafka-clients:3.4.0")
+    implementation("io.github.microutils:kotlin-logging:4.0.0-beta-2")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
@@ -38,6 +39,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.mockk:mockk:1.13.4")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.slf4j:slf4j-api")
+    implementation("ch.qos.logback:logback-classic")
 }
 
 tasks.withType<KotlinCompile> {
