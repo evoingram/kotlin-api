@@ -1,6 +1,5 @@
 package com.example.kotlinapipg1.utils
 
-import com.example.kotlinapipg1.Customer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.util.StdDateFormat
@@ -8,8 +7,8 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.apache.kafka.common.serialization.Deserializer
 import org.apache.kafka.common.serialization.Serializer
 
-class DataSerializer : Serializer<Customer> {
-    override fun serialize(topic: String, data: Customer?): ByteArray? {
+class DataSerializer : Serializer<Any?> {
+    override fun serialize(topic: String, data: Any?): ByteArray? {
         if (data == null) return null
         val utils = Utils()
         return utils.jsonMapper().writeValueAsBytes(data)
@@ -19,11 +18,11 @@ class DataSerializer : Serializer<Customer> {
     override fun configure(configs: MutableMap<String, *>?, isKey: Boolean) {}
 }
 
-class DataDeserializer : Deserializer<Customer> {
-    override fun deserialize(topic: String, data: ByteArray?): Customer? {
+class DataDeserializer : Deserializer<Any?> {
+    override fun deserialize(topic: String, data: ByteArray?): Any? {
         if (data == null) return null
         val utils = Utils()
-        return utils.jsonMapper().readValue(data, Customer::class.java)
+        return utils.jsonMapper().readValue(data, Any::class.java)
     }
 
     override fun close() {}

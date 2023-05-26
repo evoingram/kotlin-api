@@ -3,11 +3,16 @@ package com.example.kotlinapipg1.services
 import com.example.kotlinapipg1.User
 import com.example.kotlinapipg1.dataClasses.UserRequest
 import com.example.kotlinapipg1.repositories.UsersRepository
+import mu.two.KotlinLogging
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
 class UsersService(val db: UsersRepository) {
+    companion object {
+        val logger = KotlinLogging.logger {}
+    }
+
     fun findUsers(): List<User> = db.findAll().toList()
 
     fun findUserByUsersId(usersId: String): List<User> = db.findByUsersId(usersId).toList()
@@ -27,9 +32,9 @@ class UsersService(val db: UsersRepository) {
 
     fun deleteByUsersId(usersId: String) = try {
         db.deleteByUsersId(usersId)
-        println("user $usersId deleted.")
+        logger.info("user $usersId deleted.")
     } catch (exception: IllegalArgumentException) {
-        println("User not found")
+        logger.info("User not found")
         throw (exception)
     }
 

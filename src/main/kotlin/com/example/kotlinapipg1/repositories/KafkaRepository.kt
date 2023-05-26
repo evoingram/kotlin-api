@@ -1,9 +1,9 @@
 package com.example.kotlinapipg1.repositories
 
 interface KafkaRepository {
-    fun produceCustomersMessage(): String
+    fun produceMessage(topic: String, data: Any?): String
 
-    fun consumeCustomersMessage(): String
+    fun consumeMessage(topic: String): String
 
     fun keepRecords()
 }
