@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class MessageController(val messageService: MessageService) {
-    @GetMapping("/")
+    @GetMapping("/messages")
     fun index(): List<Message> = messageService.findMessages()
 
-    @GetMapping("/{id}")
+    @GetMapping("/messages/{id}")
     fun findAllById(@PathVariable id: String) = messageService.findAllById(id)
 
-    @GetMapping("/{id}/exists")
+    @GetMapping("/messages/{id}/exists")
     fun existsById(@PathVariable id: String) = messageService.existsById(id)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/messages/{id}")
     fun deleteById(@PathVariable id: String) = messageService.deleteById(id)
 
-    @PostMapping("/")
+    @PostMapping("/messages")
     fun post(@RequestBody message: Message) = messageService.save(message)
 }

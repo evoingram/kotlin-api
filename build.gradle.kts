@@ -38,6 +38,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.mockk:mockk:1.13.4")
+    testImplementation("io.mockk:mockk:1.13.4")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.slf4j:slf4j-api")
     implementation("ch.qos.logback:logback-classic")

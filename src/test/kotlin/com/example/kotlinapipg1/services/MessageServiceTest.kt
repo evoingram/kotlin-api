@@ -2,6 +2,7 @@ package com.example.kotlinapipg1.services
 
 import com.example.kotlinapipg1.Message
 import com.example.kotlinapipg1.repositories.MessageRepository
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
@@ -50,4 +51,23 @@ class MessageServiceTest {
         messageService.findMessages()
         verify(messagesRepository).findAll()
     }
+
+    @Test
+    fun `test find all messages by Id`() {
+        `when`(messagesRepository.findAllById(messagesId)).thenReturn(mutableListOf(testMessage1))
+        val messageService = MessageService(messagesRepository)
+        messageService.findAllById(messagesId)
+        verify(messagesRepository).findAllById(messagesId)
+    }
+
+    @Test
+    fun `test saving message to database`() {
+        val messageService = MessageService(messagesRepository)
+        val message = Message(messagesId, "test saving message")
+        `when`(messagesRepository.save(message)).thenReturn(message)
+        val savedMessage = messageService.save(message)
+        Assertions.assertEquals(savedMessage, Unit)
+        verify(messagesRepository).save(message)
+    }
+
 }

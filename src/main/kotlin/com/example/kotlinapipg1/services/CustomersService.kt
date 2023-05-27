@@ -12,9 +12,7 @@ class CustomersService(val db: CustomersRepository) {
 
     fun findCustomerByCustomersId(customersId: String): List<Customer> = db.findByCustomersId(customersId).toList()
 
-    fun save(customer: Customer) {
-        db.save(customer)
-    }
+    fun save(customer: Customer): Customer = db.save(customer)
 
     fun findAllByCustomersId(customersId: String): MutableIterable<Customer> = db.findAllByCustomersId(customersId)
 

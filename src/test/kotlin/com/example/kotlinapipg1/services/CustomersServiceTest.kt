@@ -1,19 +1,31 @@
 package com.example.kotlinapipg1.services
 
 import com.example.kotlinapipg1.Customer
+import com.example.kotlinapipg1.data.DataGenerator
+import com.example.kotlinapipg1.dataClasses.CustomerRequest
 import com.example.kotlinapipg1.repositories.CustomersRepository
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
 @SpringBootTest
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@ExtendWith(MockitoExtension::class)
 class CustomersServiceTest {
 
     @Mock
-    private lateinit var customersRepository: CustomersRepository
+    lateinit var customersRepository: CustomersRepository
 
     private final val usersId1 = UUID.randomUUID().toString()
     private final val usersId2 = UUID.randomUUID().toString()
@@ -45,7 +57,6 @@ class CustomersServiceTest {
 
     @Test
     fun `test delete customer by customers id`() {
-        `when`(customersRepository.findById(customersId1)).thenReturn(Optional.of(testCustomer))
         val customerService = CustomersService(customersRepository)
         customerService.deleteByCustomersId(customersId1)
         verify(customersRepository).deleteByCustomersId(customersId1)
@@ -53,7 +64,6 @@ class CustomersServiceTest {
 
     @Test
     fun `test exists by customers id`() {
-        `when`(customersRepository.findById(customersId1)).thenReturn(Optional.empty())
         val customerService = CustomersService(customersRepository)
         customerService.existsByCustomersId(customersId1)
         verify(customersRepository).existsByCustomersId(customersId1)
@@ -61,40 +71,63 @@ class CustomersServiceTest {
 
     @Test
     fun `test find customer by company`() {
-        `when`(customersRepository.findAll()).thenReturn(listOf(testCustomer2))
         val customerService = CustomersService(customersRepository)
+        `when`(customersRepository.findAll()).thenReturn(listOf(testCustomer2))
         customerService.findCustomerByCompany(testCustomer2.company.toString())
         verify(customersRepository).findAll()
     }
 
     @Test
     fun `test find customer by phone number`() {
-        `when`(customersRepository.findAll()).thenReturn(listOf(testCustomer2))
         val customerService = CustomersService(customersRepository)
+        `when`(customersRepository.findAll()).thenReturn(listOf(testCustomer2))
         customerService.findCustomerByPhoneNumber(testCustomer2.businessPhone.toString())
         verify(customersRepository).findAll()
     }
 
-    /*
     @Test
-    fun `test exists customer by customersId -- null customer throws IllegalArgumentException`() {
-        `when`(customersRepository.findById(customersId)).thenReturn(Optional.empty())
+    fun `test find customers`() {
         val customerService = CustomersService(customersRepository)
-        val exception = assertThrows(IllegalArgumentException::class.java) {
-            customerService.existsByCustomersId(null)
-        }
-        assertEquals("Customer not found", exception.message)
+        `when`(customersRepository.findAll()).thenReturn(listOf(testCustomer2))
+        customerService.findCustomers()
+        verify(customersRepository).findAll()
     }
 
     @Test
-    fun `test delete customer by customersId -- customer not found`() {
-        `when`(customersRepository.findById(customersId)).thenReturn(Optional.empty())
+    fun `test find customers by customers id`() {
         val customerService = CustomersService(customersRepository)
-        val exception = assertThrows(IllegalArgumentException::class.java) {
-            customerService.deleteByCustomersId(customersId)
-        }
-        assertEquals("Customer not found", exception.message)
+        `when`(customersRepository.findByCustomersId(customersId1)).thenReturn(listOf(testCustomer))
+        customerService.findCustomerByCustomersId(customersId1)
+        verify(customersRepository).findByCustomersId(customersId1)
     }
 
-     */
+    @Test
+    fun `test find all by customers id`() {
+        val customerService = CustomersService(customersRepository)
+        `when`(customersRepository.findAllByCustomersId(customersId1)).thenReturn(mutableListOf(testCustomer))
+        customerService.findAllByCustomersId(customersId1)
+        verify(customersRepository).findAllByCustomersId(customersId1)
+    }
+
+    @Test
+    fun `test saving customer to database`() {
+        val customerService = CustomersService(customersRepository)
+        val customer = DataGenerator.testCustomer
+        `when`(customersRepository.save(customer)).thenReturn(customer)
+        val savedCustomer = customerService.save(customer)
+        assertEquals(customer, savedCustomer)
+        verify(customersRepository).save(customer)
+    }
+
+    @Test
+    fun `test updating customer`() {
+        val customerService = CustomersService(customersRepository)
+        Mockito.doNothing().`when`(customersRepository)
+            .updateCustomerByCustomersId(testCustomer.customersId.toString(), "Adam", "Ingramm")
+        customerService.updateCustomerByCustomersId(
+            testCustomer.customersId.toString(),
+            CustomerRequest(testCustomer.customersId.toString(), firstName = "Adam", lastName = "Ingramm")
+        )
+        verify(customersRepository).updateCustomerByCustomersId(testCustomer.customersId.toString(), "Adam", "Ingramm")
+    }
 }

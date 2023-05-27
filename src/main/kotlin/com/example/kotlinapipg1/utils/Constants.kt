@@ -1,11 +1,11 @@
 package com.example.kotlinapipg1.utils
 
 object Constants {
-    val CUSTOMERS_TOPIC = "customers"
-    val ORDERS_TOPIC = "orders"
-    val APPEARANCES_TOPIC = "appearances"
-    val INVOICES_TOPIC = "invoices"
-    val CASES_TOPIC = "cases"
-    val STATUSES_TOPIC = "statuses"
-    val BROKER_ADDRESS = "localhost:9092"
+    const val CUSTOMERS_TOPIC = "customers"
+    const val ORDERS_TOPIC = "orders"
+    const val APPEARANCES_TOPIC = "appearances"
+    const val INVOICES_TOPIC = "invoices"
+    const val CASES_TOPIC = "cases"
+    const val STATUSES_TOPIC = "statuses"
+    const val BROKER_ADDRESS = "localhost:9092"
 }

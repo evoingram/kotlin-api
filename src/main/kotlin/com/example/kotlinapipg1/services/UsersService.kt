@@ -17,9 +17,7 @@ class UsersService(val db: UsersRepository) {
 
     fun findUserByUsersId(usersId: String): List<User> = db.findByUsersId(usersId).toList()
 
-    fun save(message: User) {
-        db.save(message)
-    }
+    fun save(message: User): User = db.save(message)
 
     fun findAllByUsersId(usersId: String) = db.findAllByUsersId(usersId)
 

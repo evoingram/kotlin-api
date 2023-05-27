@@ -33,8 +33,8 @@ class CustomersController(val customersService: CustomersService) {
     @GetMapping("/customers/company/{company}")
     fun findCustomerByCompany(@PathVariable company: String): Customer = customersService.findCustomerByCompany(company)
 
-    @PutMapping("/users/{customersId}")
-    fun updateCustomererByCustomersId(
+    @PutMapping("/customers/{customersId}")
+    fun updateCustomerByCustomersId(
         @PathVariable customersId: String,
         @RequestBody customerRequest: CustomerRequest,
     ): String {
