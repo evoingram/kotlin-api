@@ -1,11 +1,5 @@
 package com.example.kotlinapipg1.kafka
 
-import com.example.kotlinapipg1.Appearance
-import com.example.kotlinapipg1.Case
-import com.example.kotlinapipg1.Customer
-import com.example.kotlinapipg1.Invoice
-import com.example.kotlinapipg1.Order
-import com.example.kotlinapipg1.Status
 import com.example.kotlinapipg1.data.DataGenerator
 import com.example.kotlinapipg1.utils.Constants.APPEARANCES_TOPIC
 import com.example.kotlinapipg1.utils.Constants.CASES_TOPIC
@@ -18,8 +12,10 @@ import mu.two.KotlinLogging
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.common.serialization.StringSerializer
 import java.util.*
+import java.util.concurrent.Future
 
 class KafkaProducer {
     companion object {
@@ -27,6 +23,7 @@ class KafkaProducer {
     }
 
     private fun createProducer(brokers: String): Producer<String, Any?> {
+        logger.info("kafkaProducer.createProducer is running.")
         val props = Properties()
         props["bootstrap.servers"] = brokers
         props["key.serializer"] = StringSerializer::class.java.canonicalName
@@ -34,47 +31,38 @@ class KafkaProducer {
         return KafkaProducer(props)
     }
 
-    fun serializeCustomer(customer: Customer?) = customer ?: DataGenerator.testCustomer1
-
-    fun produceCustomer(brokers: String, customer: Customer) {
+    fun produce(brokers: String, topic: String) {
+        logger.info("kafkaProducer.produce is running for topic $topic.")
         val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(CUSTOMERS_TOPIC, customer))
-        logger.info("Kafka message for customer $customer was sent to producer.")
-        futureResult.get()
-    }
+        var futureResult: Future<RecordMetadata>
+        when (topic) {
+            CUSTOMERS_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(CUSTOMERS_TOPIC, DataGenerator.testCustomer))
+            }
 
-    fun produceOrder(brokers: String, order: Order) {
-        val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(ORDERS_TOPIC, order))
-        logger.info("Kafka message for order $order was sent to producer.")
-        futureResult.get()
-    }
+            ORDERS_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(ORDERS_TOPIC, DataGenerator.testOrder))
+            }
 
-    fun produceCase(brokers: String, case: Case) {
-        val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(CASES_TOPIC, case))
-        logger.info("Kafka message for case $case was sent to producer.")
-        futureResult.get()
-    }
+            INVOICES_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(INVOICES_TOPIC, DataGenerator.testInvoice))
+            }
 
-    fun produceInvoice(brokers: String, invoice: Invoice) {
-        val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(INVOICES_TOPIC, invoice))
-        logger.info("Kafka message for case $invoice was sent to producer.")
-        futureResult.get()
-    }
+            CASES_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(CASES_TOPIC, DataGenerator.testCase))
+            }
 
-    fun produceAppearances(brokers: String, appearances: List<Appearance>) {
-        val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(APPEARANCES_TOPIC, appearances))
-        logger.info("Kafka message for speakers $appearances was sent to producer.")
-        futureResult.get()
-    }
+            STATUSES_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(STATUSES_TOPIC, DataGenerator.testStatus))
+            }
 
-    fun produceStatus(brokers: String, status: Status) {
-        val producer = createProducer(brokers)
-        val futureResult = producer.send(ProducerRecord(STATUSES_TOPIC, status))
-        logger.info("Kafka message for customer $status was sent to producer.")
+            APPEARANCES_TOPIC -> {
+                futureResult = producer.send(ProducerRecord(APPEARANCES_TOPIC, DataGenerator.testAppearance))
+            }
+
+            else -> futureResult = producer.send(ProducerRecord(CUSTOMERS_TOPIC, "There is no data to be sent."))
+        }
+        logger.info("Kafka message from DataGenerator was sent to producer for topic $topic.")
         futureResult.get()
     }
 }

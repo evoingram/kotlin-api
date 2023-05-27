@@ -2,14 +2,13 @@ package com.example.kotlinapipg1
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
-import java.time.OffsetDateTime
 
 @Table("ORDERS")
 data class Order(
     @Id var ordersId: String?,
-    val turnaround: Turnaround,
+    val turnaround: Int,
     val audioLength: Int,
-    val orderDate: OffsetDateTime,
+    val orderDate: String,
     val filed: Boolean? = false,
     val casesId: String? = null,
     val invoicesId: String? = null,

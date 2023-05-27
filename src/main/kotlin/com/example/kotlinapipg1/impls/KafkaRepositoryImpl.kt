@@ -4,18 +4,11 @@ import com.example.kotlinapipg1.repositories.KafkaRepository
 import com.example.kotlinapipg1.services.KafkaService
 
 class KafkaRepositoryImpl : KafkaRepository {
-    override fun produceCustomersMessage(): String {
-        val kafkaService = KafkaService()
-        return kafkaService.produceCustomersMessage()
-    }
 
-    override fun consumeCustomersMessage(): String {
-        val kafkaService = KafkaService()
-        return kafkaService.consumeCustomersMessage()
-    }
+    private val kafkaService = KafkaService()
+    override fun produceMessage(topic: String): String = kafkaService.produceMessage(topic)
 
-    override fun keepRecords() {
-        val kafkaService = KafkaService()
-        return kafkaService.keepRecords()
-    }
+    override fun consumeMessage(topic: String): String = kafkaService.consumeMessage(topic)
+
+    override fun keepRecords() = kafkaService.keepRecords()
 }

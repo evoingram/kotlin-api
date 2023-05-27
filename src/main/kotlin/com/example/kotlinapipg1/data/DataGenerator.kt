@@ -17,11 +17,8 @@ import java.util.*
 
 object DataGenerator {
     private val faker1 = Faker()
-    private val faker2 = Faker()
     private val customersId1 = generateId()
     private val usersId1 = generateId()
-    private val customersId2 = generateId()
-    private val usersId2 = generateId()
     private val casesId = generateId()
     private val appearancesId = generateId()
     private val ordersId = generateId()
@@ -30,7 +27,7 @@ object DataGenerator {
     private val statusesId = generateId()
 
 
-    val testCustomer1 = Customer(
+    val testCustomer = Customer(
         customersId1,
         usersId1,
         faker1.name().firstName(),
@@ -39,18 +36,6 @@ object DataGenerator {
         faker1.address().state(),
         faker1.address().zipCode(),
         faker1.company().toString(),
-    )
-
-    val testCustomer2 = Customer(
-        customersId2,
-        usersId2,
-        faker2.name().firstName(),
-        faker2.name().lastName(),
-        faker2.address().city(),
-        faker2.address().state(),
-        faker2.address().zipCode(),
-        faker2.company().toString(),
-        businessPhone = faker2.phoneNumber().toString(),
     )
 
     val testAppearance = Appearance(
@@ -74,7 +59,7 @@ object DataGenerator {
 
     val testInvoice = Invoice(
         generateId(),
-        OffsetDateTime.now(),
+        OffsetDateTime.now().toString(),
         customersId1,
         casesId,
         paid = false,
@@ -83,9 +68,9 @@ object DataGenerator {
 
     val testOrder = Order(
         ordersId,
-        Turnaround.FortyFive,
+        Turnaround.FortyFive.days,
         60,
-        OffsetDateTime.now(),
+        OffsetDateTime.now().toString(),
         false,
         casesId,
         invoicesId,

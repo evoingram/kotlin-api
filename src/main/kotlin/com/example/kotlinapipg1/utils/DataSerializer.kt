@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.apache.kafka.common.serialization.Deserializer
 import org.apache.kafka.common.serialization.Serializer
 
+
 class DataSerializer : Serializer<Any?> {
     override fun serialize(topic: String, data: Any?): ByteArray? {
         if (data == null) return null

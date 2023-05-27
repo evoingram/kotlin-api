@@ -20,7 +20,7 @@ class CustomersServiceTest {
     private final val customersId1 = UUID.randomUUID().toString()
     private final val customersId2 = UUID.randomUUID().toString()
 
-    val testCustomer1 = Customer(
+    val testCustomer = Customer(
         customersId1,
         usersId1,
         "Erica",
@@ -45,7 +45,7 @@ class CustomersServiceTest {
 
     @Test
     fun `test delete customer by customers id`() {
-        `when`(customersRepository.findById(customersId1)).thenReturn(Optional.of(testCustomer1))
+        `when`(customersRepository.findById(customersId1)).thenReturn(Optional.of(testCustomer))
         val customerService = CustomersService(customersRepository)
         customerService.deleteByCustomersId(customersId1)
         verify(customersRepository).deleteByCustomersId(customersId1)
