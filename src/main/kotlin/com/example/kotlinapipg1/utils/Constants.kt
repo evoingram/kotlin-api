@@ -8,4 +8,5 @@ object Constants {
     const val CASES_TOPIC = "cases"
     const val STATUSES_TOPIC = "statuses"
     const val BROKER_ADDRESS = "localhost:9092"
+    const val ADDRESS_VALIDATION_URL = "https://www.yaddress.net/api/address"
 }
