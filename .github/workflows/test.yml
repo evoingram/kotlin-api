@@ -18,11 +18,17 @@ jobs:
           server-username: ${{secrets.KOTLIN_API_USER}}
           server-password: ${{secrets.KOTLIN_API_TOKEN}}
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Set up Kotlin
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          kotlin-version: '1.5.x'  # Replace with the desired Kotlin version
+
+      - name: Build and Test
+        run: ./gradlew build
 
       - name: Run tests with JUnit
-        run: mvn test
+        run: ./gradlew test
 
       - name: Publish test coverage
         uses: codecov/codecov-action@v2
