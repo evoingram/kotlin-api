@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: '17'
           server-username: "evoingram"
-          server-password: $KOTLIN_API_TOKEN
+          server-password: ${{secrets.KOTLIN_API_TOKEN}}
 
       - name: Build with Maven
         run: mvn clean install
