@@ -1,0 +1,28 @@
+name: Test with JUnit
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Run tests with JUnit
+        run: mvn test
+
+      - name: Publish test coverage
+        uses: codecov/codecov-action@v2
+        with:
+          file: build/jacoco/htmlOutput/jacoco-resources
+          flags: junit
