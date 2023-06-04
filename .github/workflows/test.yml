@@ -56,22 +56,22 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: create Kafka customers topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic customers --bootstrap-server kafka:9092 echo "topic customers was created"
+        run: kafka/bin/kafka-topics.sh --create --topic customers --bootstrap-server kafka:9092 echo "topic customers was created"
 
       - name: create Kafka orders topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic orders --bootstrap-server kafka:9092 echo "topic orders was created"
+        run: kafka/bin/kafka-topics.sh --create --topic orders --bootstrap-server kafka:9092 echo "topic orders was created"
 
       - name: create Kafka invoices topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic invoices --bootstrap-server kafka:9092 echo "topic invoices was created"
+        run: kafka/bin/kafka-topics.sh --create --topic invoices --bootstrap-server kafka:9092 echo "topic invoices was created"
 
       - name: create Kafka cases topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic cases --bootstrap-server kafka:9092 echo "topic cases was created"
+        run: kafka/bin/kafka-topics.sh --create --topic cases --bootstrap-server kafka:9092 echo "topic cases was created"
 
       - name: create Kafka statuses topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic statuses --bootstrap-server kafka:9092 echo "topic statuses was created"
+        run: kafka/bin/kafka-topics.sh --create --topic statuses --bootstrap-server kafka:9092 echo "topic statuses was created"
 
       - name: create Kafka appearances topic
-        run: bitnami/kafka/bin/kafka-topics.sh --create --topic appearances --bootstrap-server kafka:9092 echo "topic appearances was created"
+        run: kafka/bin/kafka-topics.sh --create --topic appearances --bootstrap-server kafka:9092 echo "topic appearances was created"
 
       - name: Build and Test
         run: ./gradlew build
