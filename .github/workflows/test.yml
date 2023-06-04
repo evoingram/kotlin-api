@@ -32,6 +32,7 @@ jobs:
           ALLOW_PLAINTEXT_LISTENER: yes
           KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
           KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
+          KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: yes
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -49,7 +50,11 @@ jobs:
         with:
           java-version: '17'
           kotlin-version: '1.8.21'  # Replace with the desired Kotlin version
-          username: ${{secrets.KOTLIN_API_USER}}
+          server-username: ${{secrets.KOTLIN_API_USER}}
+          server-password: ${{secrets.KOTLIN_API_TOKEN}}
+          # valid inputs are ['java-version', 'java-package', 'architecture', 'jdkFile',
+            # 'server-id', 'server-username', 'server-password', 'settings-path',
+                      # 'gpg-private-key', 'gpg-passphrase']
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
