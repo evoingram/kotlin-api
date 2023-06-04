@@ -33,7 +33,7 @@ class UsersController(val usersService: UsersService) {
     }
 
     @DeleteMapping("/users/{usersId}")
-    fun deleteByUsersId(@PathVariable usersId: String) = usersService.deleteByUsersId(usersId)
+    fun deleteByUsersId(@PathVariable usersId: String): Unit = usersService.deleteByUsersId(usersId)
 
     @PostMapping("/users/")
     fun post(@RequestBody user: User) = usersService.save(user)

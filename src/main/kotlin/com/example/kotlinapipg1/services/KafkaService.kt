@@ -4,7 +4,7 @@ import com.example.kotlinapipg1.kafka.KafkaConsumer
 import com.example.kotlinapipg1.kafka.KafkaProducer
 import com.example.kotlinapipg1.repositories.KafkaRepository
 import com.example.kotlinapipg1.utils.Constants.BROKER_ADDRESS
-import mu.two.KotlinLogging
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import java.time.Duration
 

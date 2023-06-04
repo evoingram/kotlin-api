@@ -3,9 +3,8 @@ package com.example.kotlinapipg1.services
 import com.example.kotlinapipg1.User
 import com.example.kotlinapipg1.dataClasses.UserRequest
 import com.example.kotlinapipg1.repositories.UsersRepository
-import mu.two.KotlinLogging
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class UsersService(val db: UsersRepository) {
@@ -28,7 +27,7 @@ class UsersService(val db: UsersRepository) {
             }
         }
 
-    fun deleteByUsersId(usersId: String) = try {
+    fun deleteByUsersId(usersId: String): Unit = try {
         db.deleteByUsersId(usersId)
         logger.info("user $usersId deleted.")
     } catch (exception: IllegalArgumentException) {
@@ -51,7 +50,4 @@ class UsersService(val db: UsersRepository) {
 
     fun findUserByUsername(username: String): User =
         db.findAll().filter { it.username == username }[0]
-
-    fun <T : Any> Optional<out T>.toList(): List<T> =
-        if (isPresent) listOf(get()) else emptyList()
-}
+    }

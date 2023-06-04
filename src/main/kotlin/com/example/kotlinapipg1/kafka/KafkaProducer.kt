@@ -8,7 +8,7 @@ import com.example.kotlinapipg1.utils.Constants.INVOICES_TOPIC
 import com.example.kotlinapipg1.utils.Constants.ORDERS_TOPIC
 import com.example.kotlinapipg1.utils.Constants.STATUSES_TOPIC
 import com.example.kotlinapipg1.utils.DataSerializer
-import mu.two.KotlinLogging
+import mu.KotlinLogging
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
